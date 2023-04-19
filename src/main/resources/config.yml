@@ -1,0 +1,18 @@
+# Configuration file for AdvancementCommand plugin
+
+# Define sets of advancements and commands
+sets:
+  set1:
+    Advancements:
+      - "minecraft:story/craft_planks"
+      - "minecraft:story/upgrade_tools"
+    Commands:
+      - "give %player_name% minecraft:diamond_pickaxe"
+      - "tellraw %player_name% {\"text\":\"Congratulations on completing the set!\"}"
+  set2:
+    Advancements:
+      - "minecraft:story/smelt_iron"
+      - "minecraft:story/enter_the_nether"
+    Commands:
+      - "give %player_name% minecraft:diamond_sword"
+      - "tellraw %player_name% {\"text\":\"You have completed the second set!\"}"

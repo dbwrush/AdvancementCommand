@@ -1,0 +1,9 @@
+name: AdvancementCommand
+version: '${project.version}'
+main: net.sudologic.advancementcommand.AdvancementCommand
+api-version: 1.19
+prefix: AdvancementCommand
+authors: [sudologic]
+depend: [PlaceholderAPI]
+description: A plugin to run a set of commands when a set of advancements are met.
+website: sudologic.net
