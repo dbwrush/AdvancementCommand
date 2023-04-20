@@ -27,9 +27,11 @@ public class Set {
     public void runCommands(Player p) {
         for (String command : commands) {
             String parsedCommand = command.toString();
-            Bukkit.getLogger().log(Level.INFO, parsedCommand);
             parsedCommand = PlaceholderAPI.setPlaceholders(p, parsedCommand);
-            Bukkit.getLogger().log(Level.INFO, parsedCommand);
+            if(parsedCommand.contains("%")) {
+                Bukkit.getLogger().log(Level.INFO, "It looks like your command still has % characters in it.");
+                Bukkit.getLogger().log(Level.INFO, "This might mean you are missing a PlaceholderAPI expansion!");
+            }
             Bukkit.dispatchCommand(Bukkit.getConsoleSender(), parsedCommand);
         }
     }
