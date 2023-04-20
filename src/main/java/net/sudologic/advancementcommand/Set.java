@@ -13,12 +13,17 @@ import java.util.List;
 import java.util.logging.Level;
 
 public class Set {
-    String name;
-    String[] advancements;
-    String[] commands;
+    private static AdvancementCommand plugin;
 
-    public Set(String name, String[] advancements, String[] commands) {
-        Bukkit.getLogger().log(Level.INFO, "Creating Set " + name);
+    private String name;
+    private String[] advancements;
+    private String[] commands;
+
+    public Set(String name, String[] advancements, String[] commands, AdvancementCommand plugin) {
+        this.plugin = plugin;
+        if(plugin.getDebug()) {
+            Bukkit.getLogger().log(Level.INFO, "Creating Set " + name);
+        }
         this.name = name;
         this.advancements = advancements;
         this.commands = commands;
@@ -28,7 +33,7 @@ public class Set {
         for (String command : commands) {
             String parsedCommand = command.toString();
             parsedCommand = PlaceholderAPI.setPlaceholders(p, parsedCommand);
-            if(parsedCommand.contains("%")) {
+            if(plugin.getDebug() && parsedCommand.contains("%")) {
                 Bukkit.getLogger().log(Level.INFO, "It looks like your command still has % characters in it.");
                 Bukkit.getLogger().log(Level.INFO, "This might mean you are missing a PlaceholderAPI expansion!");
             }
@@ -71,5 +76,9 @@ public class Set {
             }
         }
         return false;
+    }
+
+    public String getName() {
+        return name;
     }
 }

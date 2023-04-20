@@ -11,6 +11,7 @@ import java.util.logging.Level;
 
 public final class AdvancementCommand extends JavaPlugin {
     private ArrayList<Set> sets;
+    private boolean debug;
 
     @Override
     public void onEnable() {
@@ -32,15 +33,19 @@ public final class AdvancementCommand extends JavaPlugin {
 
     public void loadConfigOptions() {
         FileConfiguration config = getConfig();
+        debug = config.getBoolean("debug");
+
         ConfigurationSection setsSection = config.getConfigurationSection("sets");
         for(String key : setsSection.getKeys(false)) {
-            Bukkit.getLogger().log(Level.INFO, key);
+            if(debug) {
+                Bukkit.getLogger().log(Level.INFO, "Parsing set " + key);
+            }
             ConfigurationSection set = config.getConfigurationSection("sets." + key);
             List<String> advancementsList = set.getStringList("Advancements");
             String[] advancements = advancementsList.toArray(new String[0]);
             List<String> commandsList = set.getStringList("Commands");
             String[] commands = commandsList.toArray(new String[0]);
-            sets.add(new Set(key, advancements, commands));
+            sets.add(new Set(key, advancements, commands, this));
         }
 
         // Save configuration
@@ -50,5 +55,9 @@ public final class AdvancementCommand extends JavaPlugin {
 
     public ArrayList<Set> getSets() {
         return sets;
+    }
+
+    public boolean getDebug() {
+        return debug;
     }
 }
