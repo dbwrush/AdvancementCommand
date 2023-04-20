@@ -26,7 +26,10 @@ public class Set {
 
     public void runCommands(Player p) {
         for (String command : commands) {
-            String parsedCommand = PlaceholderAPI.setPlaceholders(p, command);
+            String parsedCommand = command.toString();
+            Bukkit.getLogger().log(Level.INFO, parsedCommand);
+            parsedCommand = PlaceholderAPI.setPlaceholders(p, parsedCommand);
+            Bukkit.getLogger().log(Level.INFO, parsedCommand);
             Bukkit.dispatchCommand(Bukkit.getConsoleSender(), parsedCommand);
         }
     }

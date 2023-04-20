@@ -25,9 +25,9 @@ public class PlayerAdvancementListener implements Listener {
         }
         Bukkit.getLogger().log(Level.INFO, "Player " + p.getName() + " has completed advancement " + a.getKey());
         for(Set set : plugin.getSets()) {
-            Bukkit.getLogger().log(Level.INFO, "Checking if set contains advancement");
+            Bukkit.getLogger().log(Level.INFO, "Checking if set " + set.name + " contains advancement");
             if(set.containsAdvancement(a)) {
-                Bukkit.getLogger().log(Level.INFO, "Set contains advancement. Checking other criteria.");
+                Bukkit.getLogger().log(Level.INFO, "Set " + set.name + " contains advancement. Checking other criteria.");
                 if(set.checkMissingAdvancements(p).isEmpty()) {
                     Bukkit.getLogger().log(Level.INFO, "Other criteria met. Running commands");
                     set.runCommands(p);
